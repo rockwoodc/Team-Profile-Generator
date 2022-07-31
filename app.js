@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
 const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
@@ -29,6 +30,7 @@ const siteOptions = () => {
                 internInfo();
                  break;
             default:
+                //if the user is done entering information then the page will run using the create page function at the bottom of this code
                 createPage();
         };
     });
@@ -227,6 +229,12 @@ const internInfo = () => {
         //returns user to the main menu
         siteOptions();
     });
+};
+
+//use above info to create the finished page
+function createPage () {
+    fs.writeFileSync('teamPage.html', generateSite(managerInfo, engineerInfo, internInfo));
+    console.log('Your team page has been created!'); 
 };
 
 //call for the main menu function to be run
