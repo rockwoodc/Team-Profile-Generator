@@ -32,7 +32,7 @@ const generateTeam = (employeeStuff) => {
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"> ID: ${engineer.getId()}</li>
                 <li class="list-group-item"> Email: <span id='email'><a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></span></li>
-                <li class="list-group-item">Github Username: <a target="_blank" href="https://github.com/${engineer.githubUsername}">${engineer.githubUsername}</a></li>
+                <li class="list-group-item">Github Username: <a target="_blank" href="https://github.com/${engineer.getGitHub()}">${engineer.getGitHub()}</a></li>
             </ul>
         </div>`;
              
@@ -48,7 +48,7 @@ const generateTeam = (employeeStuff) => {
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"> ID: ${intern.getId()}</li>
-                <li class="list-group-item">Email: <span id="email"><a href="mailto:${engineer.email}">${engineer.email}</a></span></li>
+                <li class="list-group-item">Email: <span id="email"><a href="mailto:${intern.email}">${intern.email}</a></span></li>
                 <li class="list-group-item"> School: ${intern.school}</li>
             </ul>
         </div>`;
@@ -56,9 +56,9 @@ const generateTeam = (employeeStuff) => {
     }
     html.push(employeeStuff.filter(employee => employee.getRole() === 'Manager').map(manager => generateManager(manager)));
 
-    html.push(employeeStuff.filter(employee => employee.getRole() === 'Manager').map(engineer => generateEngineer(engineer)));
+    html.push(employeeStuff.filter(employee => employee.getRole() === 'Engineer').map(engineer => generateEngineer(engineer)));
 
-    html.push(employeeStuff.filter(employee => employee.getRole() === 'Manager').map(intern => generateIntern(intern)));
+    html.push(employeeStuff.filter(employee => employee.getRole() === 'Intern').map(intern => generateIntern(intern)));
 
     //join HTML together
     return html.join('');
@@ -81,6 +81,7 @@ module.exports = employeeStuff => {
 <body>
     ${generateTeam(employeeStuff)}
 </body>
+<script src="../src/generate-site.js"></script>
 </html>
     `
 }
